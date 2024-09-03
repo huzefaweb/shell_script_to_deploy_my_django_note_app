@@ -42,15 +42,12 @@ sudo apt-get install docker-compose-plugin -y
 
 }
 
-Nginx: A web server that will handle the app’s web traffic.
+1. Nginx: A web server that will handle the app’s web traffic.
+2. Docker: Used to containerize the Django app and manage its environment.
+3. Docker Compose: Simplifies the management of multi-container Docker applications.
+4. The -y flag ensures that the system automatically confirms the installation of each package.
 
-Docker: Used to containerize the Django app and manage its environment.
-
-Docker Compose: Simplifies the management of multi-container Docker applications.
-
-The -y flag ensures that the system automatically confirms the installation of each package.
-
-4. Restarting Services
+# 5. Restarting Services
 Some system services need to be restarted or adjusted during deployment. The required_restarts function does this.
 
 required_restarts() {
@@ -69,11 +66,10 @@ sudo systemctl restart docker
 
 }
 
-Adjusting Docker permissions: The chown command gives the current user permissions to manage Docker.
+1. Adjusting Docker permissions: The chown command gives the current user permissions to manage Docker.
+2. Optional service restarts: The script contains commented-out lines for restarting Docker and enabling Nginx. These lines can be uncommented if the services need to be manually enabled or restarted.
 
-Optional service restarts: The script contains commented-out lines for restarting Docker and enabling Nginx. These lines can be uncommented if the services need to be manually enabled or restarted.
-
-5. Building and Deploying the Django App
+# 5. Building and Deploying the Django App
 With the environment set up, we build and run the Django app inside Docker containers using the deploy function.
 
 deploy() {
@@ -86,13 +82,12 @@ docker compose up -d
 
 }
 
-docker build: Builds a Docker image from the Dockerfile in the project directory, tagging it as notes-app.
-
-docker compose up: Starts the containers defined in the docker-compose.yml file in detached mode (-d), so they run in the background.
+1. docker build: Builds a Docker image from the Dockerfile in the project directory, tagging it as notes-app.
+2. docker compose up: Starts the containers defined in the docker-compose.yml file in detached mode (-d), so they run in the background.
 
 This step isolates the Django app inside a container, ensuring it runs in a consistent environment across different systems.
 
-6. Error Handling
+# 6. Error Handling
 The script contains error handling mechanisms at every step. Using the if condition with the ! (negation operator), it checks whether each step succeeds. If any step fails, the script stops and exits.
 
 echo "********** DEPLOYMENT STARTED *********"
@@ -131,7 +126,7 @@ If a step fails: The script prints a message and exits with a non-zero status (e
 
 Custom failure handling: You can add additional logic, like sending email alerts to the admin in case of deployment failure.
 
-Conclusion
+# Conclusion
 This bash script offers a simple yet effective way to automate the deployment of a Django app using Docker. By breaking down tasks into individual functions and adding error handling at each stage, the script ensures that any deployment issues are handled gracefully. Whether you're new to DevOps or looking to streamline your processes, this approach can save time and prevent errors during deployments.
 
 If you'd like to use this script or make your own adjustments, simply copy it and modify it as needed for your projects. Let me know in the comments if you have any questions or need further customization!

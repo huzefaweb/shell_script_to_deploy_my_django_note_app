@@ -1,22 +1,19 @@
 My Script is designed to automate the deployment of a Django app using Docker, while also handling errors.
 
-Automating Django App Deployment with Docker Using a Bash Script
+# Automating Django App Deployment with Docker Using a Bash Script
 In this blog, I’ll walk you through automating the deployment of a Django application using a bash script. This script will manage cloning the code, installing dependencies, performing required system restarts, and deploying the app in Docker containers. The script also includes basic error handling to ensure a smooth deployment process. Let’s dive into each section!
 
-1. Overview of the Script
+# 1. Overview of the Script
 Our bash script follows these steps:
 
-Clone the Django app repository from GitHub.
-
-Install necessary dependencies (Nginx and Docker).
-
-Restart services, if needed.
-
-Build and deploy the Django app using Docker.
+1. Clone the Django app repository from GitHub.
+2. I nstall necessary dependencies (Nginx and Docker).
+3. Restart services, if needed.
+4. Build and deploy the Django app using Docker.
 
 The script is modular, breaking tasks into functions that handle specific steps of the deployment.
 
-2. Cloning the Django App
+# 2. Cloning the Django App
 The first task in our deployment process is to clone the app repository from GitHub. This is handled by the code_clone function.
 
 code_clone() {
@@ -27,11 +24,10 @@ git clone https://github.com/huzefaweb/my-django-note-app.git
 
 }
 
-What it does: It clones a repository from GitHub into the local directory using the git clone command.
+1. What it does: It clones a repository from GitHub into the local directory using the git clone command.
+2. Error handling: If the directory already exists or cloning fails, the script can detect this, and you can include logic to handle it (like pulling the latest changes).
 
-Error handling: If the directory already exists or cloning fails, the script can detect this, and you can include logic to handle it (like pulling the latest changes).
-
-3. Installing Required Dependencies
+# 3. Installing Required Dependencies
 Next, we need to install Nginx, Docker, and Docker Compose, which are essential for serving and running the app inside containers. The install_requirements function handles this.
 
 install_requirements() {
@@ -63,13 +59,13 @@ echo "Performing required restarts..."
 
 sudo chown $USER /var/run/docker.sock
 
-# Uncomment the following lines if needed:
+Uncomment the following lines if needed:
 
-# sudo systemctl enable docker
+sudo systemctl enable docker
 
-# sudo systemctl enable nginx
+sudo systemctl enable nginx
 
-# sudo systemctl restart docker
+sudo systemctl restart docker
 
 }
 
